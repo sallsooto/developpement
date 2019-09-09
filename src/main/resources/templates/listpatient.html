@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link type="text/css" href="../css/stylemenu.css" rel="stylesheet" th:href="@{/css/stylemenu.css}" />
+    <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" src="../js/jquery.js" th:href="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../js/jquery-dataTable.min.js" th:href="@{/js/jquery-dataTable.min.js}"></script>
+    <script type="text/javascript" src="../js/script.js" th:href="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.responsive.css" th:href="@{/css/dataTables.responsive.css}"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" th:href="@{/css/jquery.dataTables.css}"/>
+</head>
+<body>
+  		<div class="navbar">
+			    <ul>
+			        <li><a href="menu"> Acceuille </a></li>
+			        <li><a href="patientsecretaire"> Patient </a></li>
+			        <li><a href="#"> Rendez Vous </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/rv}"> Ajouter un rendezVous  </a></li>
+			                <li><a th:href="@{/listRv}"> List rendezVous </a></li>
+			            </ul>
+			        </li>
+			       
+			        <li><a href="#"> Consultation </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/listpatient}"> List Patient </a></li>
+			                <li><a th:href="@{/listconsultation}"> List consultation</a></li>
+			            </ul>
+			        </li>
+			        <li><a href="#">Parametrage</a>
+			             <ul class="ul2">
+			                <li><a href="medecin"> Medecin </a></li>
+			                <li><a href="secretaire">Secretaire</a></li>
+			                <li><a href="service"> Service </a></li>
+			                <li><a href="specialite">Specialite</a></li>
+			                <li><a href="parametrageduree">DureeConsultation</a></li>
+			            </ul>
+			        </li>
+			    
+			         <li><a th:href="@{/statistique}">statistique</a></li>
+			        <li class="pull-right"><a th:href="@{/deconnexion}"> Deconnection </a></li>
+			    </ul>
+        </div>
+  <div class="container-fluid">
+      <div class="mdr">
+          <div class="panel-heading">
+              <h2 style="text-align: center;" id="role">La liste des patient </h2>
+          </div>
+          <div class="panel-body">
+              <!-- La laison entre DataTable et monScript.js cest le id-->
+              <table class="table table-hover table-responsive table-bordered " id="tableProduits">
+                  <!-- NB id="tableProduits" permet de relier la table avec datable -->
+                  <thead>
+                  <tr>
+                      <!-- les differentes colonnes -->
+                      <th>Nom</th>
+                      <th>telephone</th>
+                      <th>Adresse</th>
+                      <th>NumPiece</th>
+                      <th>DateNaissance</th>
+                      <th>Nationnalite</th>
+                      <th >Actions</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <!-- Parcours des donnees dans la base de donnee-->
+                  <tr th:each="patient:${ListPatient}">
+                      <td th:text="${patient.nomComplet}" ></td>
+                      <td th:text="${patient.Telephone}"></td>
+                      <td th:text="${patient.adresse}"></td>
+                      <td th:text="${patient.numPiece}"></td>
+                      <td th:text="${patient.DateNaissance}"></td>
+                      <td th:text="${patient.nationalite}"></td>
+                      
+                      <!-- les differentes actions -->
+
+                      <td >
+                          <a th:href="@{/consulterAnouveau/(numeroPiece=${patient.numPiece})} ">
+                              <!--nouvelle consultation  -->
+                              <button type="button" class="btn btn-xs btn-warning" title="nouveau consultation">
+                                  consulter
+                              </button>
+                          </a>
+                      </td>
+
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  <style>
+    table tr td{
+     color:black;
+    }
+  </style>
+</body>
+</body>
+</html>

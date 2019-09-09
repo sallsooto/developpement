@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmln:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link type="text/css" href="../css/stylemenu.css" rel="stylesheet" th:href="@{/css/stylemenu.css}" />
+    <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" src="../js/jquery.js" th:href="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../js/jquery-dataTable.min.js" th:href="@{/js/jquery-dataTable.min.js}"></script>
+    <script type="text/javascript" src="../js/script.js" th:href="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.responsive.css" th:href="@{/css/dataTables.responsive.css}"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" th:href="@{/css/jquery.dataTables.css}"/>
+</head>
+<body>
+  		<div class="navbar">
+			    <ul>
+			        <li><a href="menu"> Acceuille </a></li>
+			        <li><a href="patientsecretaire"> Patient </a></li>
+			        <li><a href="#"> Rendez Vous </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/rv}"> Ajouter un rendezVous  </a></li>
+			                <li><a th:href="@{/listRv}"> List rendezVous </a></li>
+			            </ul>
+			        </li>
+			       
+			        <li><a href="#"> Consultation </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/listpatient}"> List Patient </a></li>
+			                <li><a th:href="@{/listconsultation}"> List consultation</a></li>
+			            </ul>
+			        </li>
+			        <li><a href="#">Parametrage</a>
+			             <ul class="ul2">
+			                <li><a href="medecin"> Medecin </a></li>
+			                <li><a href="secretaire">Secretaire</a></li>
+			                <li><a href="service"> Service </a></li>
+			                <li><a href="specialite">Specialite</a></li>
+			                <li><a href="parametrageduree">DureeConsultation</a></li>
+			            </ul>
+			        </li>
+			    
+			         <li><a th:href="@{/statistique}">statistique</a></li>
+			        <li class="pull-right"><a th:href="@{/deconnexion}"> Deconnection </a></li>
+			    </ul>
+        </div>
+   
+   </div>     
+  <div class="container">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h6 style="text-align: center;" id="role">LISTES SERVICES</h6> 
+          </div>
+          <div class="panel-body">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#createProduit">
+                Ajouter
+          </button>
+          <label th:text="${messages}" style="color:red;"></label>
+              <!-- La laison entre DataTable et monScript.js cest le id-->
+              <table class="table table-hover table-responsive table-bordered " id="tableProduits">
+                  <!-- NB id="tableProduits" permet de relier la table avec datable -->
+                  <thead>
+                  <tr>
+                      <!-- les differentes colonnes -->
+                      <th>Service</th>                
+                      <th >Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <!-- Parcours des donnees dans la base de donnee-->
+                  <tr th:each="specialite:${ListSpecialites}">
+                      <td th:text="${specialite.libelle}"></td>          
+                      <!-- les differentes actions -->
+                      <td >
+                          <a th:href="@{/modifierSpecialite(ID=${specialite.id})}">
+                              <!--nouvelle consultation  -->
+                              <button type="button" class="btn btn-xs btn-warning" title="nouveau consultation">
+                                  modifier
+                              </button>
+                          </a>                   
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+<!-- ###Traitement du bouton modal -->
+<div class="modal fade" id="createProduit" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="panel panel-primary">
+                <div class="panel panel-heading">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Ajouter Service</h3>
+                    </div>
+                </div>
+                <div class="panel panel-body">
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                           <form th:method="post"  th:object="${specialites}" th:action="@{/saveSpecialite}" >
+                     
+                               <div class="form-group">
+                                    <label for="nomcomplet">Nom Specialite</label>
+                                    <input type="text" class="form-control" id="exampleNom" placeholder="service " th:field="*{libelle}" />
+                                    <div  th:errors="*{libelle}" class="invalid-feedback"></div>
+                                </div>
+                                <div class="modal-footer">
+                    
+                                    <button type="submit" id="saveImage" class="btn btn-success btn-hover-green"  role="button">Enregistre</button>                           
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Fermer</button>
+                                    <div  th:text="${message}"></div>
+                                </div>                            
+                         </form>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

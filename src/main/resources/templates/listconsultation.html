@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>listconsultation</title>
+   <link type="text/css" href="../css/stylemenu.css" rel="stylesheet" th:href="@{/css/stylemenu.css}" />
+    <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" src="../js/jquery.js" th:href="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../js/jquery-dataTable.min.js" th:href="@{/js/jquery-dataTable.min.js}"></script>
+    <script type="text/javascript" src="../js/script.js" th:href="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.responsive.css" th:href="@{/css/dataTables.responsive.css}"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" th:href="@{/css/jquery.dataTables.css}"/>
+</head>
+<body>
+		<div class="navbar">
+			    <ul>
+			        <li><a href="menu"> Acceuille </a></li>
+			        <li><a href="patientsecretaire"> Patient </a></li>
+			        <li><a href="#"> Rendez Vous </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/rv}"> Ajouter un rendezVous  </a></li>
+			                <li><a th:href="@{/listRv}"> List rendezVous </a></li>
+			            </ul>
+			        </li>
+			       
+			        <li><a href="#"> Consultation </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/listpatient}"> List Patient </a></li>
+			                <li><a th:href="@{/listconsultation}"> List consultation</a></li>
+			            </ul>
+			        </li>
+			        <li><a href="#">Parametrage</a>
+			             <ul class="ul2">
+			                <li><a href="medecin"> Medecin </a></li>
+			                <li><a href="secretaire">Secretaire</a></li>
+			                <li><a href="service"> Service </a></li>
+			                <li><a href="specialite">Specialite</a></li>
+			                <li><a href="parametrageduree">DureeConsultation</a></li>
+			            </ul>
+			        </li>
+			    
+			         <li><a th:href="@{/statistique}">statistique</a></li>
+			        <li class="pull-right"><a th:href="@{/deconnexion}"> Deconnection </a></li>
+			    </ul>
+        </div>
+<div class="container">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h6 style="text-align: center;" id="role">LISTES CONSULTATIONS</h6>
+          </div>
+       
+
+          <div class="panel-body">
+              <!-- La laison entre DataTable et monScript.js cest le id-->
+              <table class="table table-hover table-responsive table-bordered " id="tableProduits">
+                  <!-- NB id="tableProduits" permet de relier la table avec datable -->
+                  <thead>
+                  <tr>
+                      <!-- les differentes colonnes -->
+                      <th>Nom</th>
+                      <th>Numpiece</th>
+                      <th>DateNaissance</th>
+                      <th>Observation</th>
+                      <th>ordonnance</th>
+                      <th>dateConsul</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <!-- Parcours des donnees dans la base de donnee-->
+                  <tr th:each="cons:${listConsultation}">
+                      <td th:text="${cons.patient.nomComplet}"></td>
+                      <td th:text="${cons.patient.numPiece}"></td>
+                      <td  th:text="${#dates.format(cons.patient.dateNaissance, 'dd-MM-yyyy')}"></td>
+                      <td ><textarea rows="1" cols="30" th:text="${cons.remarque}"></textarea></td>
+                      <td ><textarea rows="1" cols="40" th:text="${cons.ordonnance}"></textarea></td>
+                      <td th:text="${#dates.format(cons.dateConsultation, 'dd-MM-yyyy')}"></td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

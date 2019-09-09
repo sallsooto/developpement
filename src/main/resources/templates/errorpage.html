@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>pageInterdit</title>
+    <link type="text/css" href="../static/css/stylemenu.css" rel="stylesheet" th:href="@{/css/consultation.css}">
+    <link type="text/css" href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+		<div class="navbar">
+			    <ul>
+			        <li><a href="menu"> Acceuille </a></li>
+			        <li><a href="patientsecretaire"> Patient </a></li>
+			        <li><a href="#"> Rendez Vous </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/rv}"> Ajouter un rendezVous  </a></li>
+			                <li><a th:href="@{/listRv}"> List rendezVous </a></li>
+			            </ul>
+			        </li>
+			       
+			        <li><a href="#"> Consultation </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/listpatient}"> List Patient </a></li>
+			                <li><a th:href="@{/listconsultation}"> List consultation</a></li>
+			            </ul>
+			        </li>
+			        <li><a href="#">Parametrage</a>
+			             <ul class="ul2">
+			                <li><a href="medecin"> Medecin </a></li>
+			                <li><a href="secretaire">Secretaire</a></li>
+			                <li><a href="service"> Service </a></li>
+			                <li><a href="specialite">Specialite</a></li>
+			                <li><a href="parametrageduree">DureeConsultation</a></li>
+			            </ul>
+			        </li>
+			    
+			         <li><a th:href="@{/statistique}">statistique</a></li>
+			        <li class="pull-right"><a th:href="@{/deconnexion}"> Deconnection </a></li>
+			    </ul>
+        </div>
+<div class="text">
+<h3> cette page n'est malheuresement pas disponible </h3>
+ <h4> le lien que vous choisi n'est pas votre role </h4>
+</div>
+ 
+ 
+ <style>
+   .text{
+    
+    
+    color:black;
+     font-size: 20px;
+     
+     margin-left:350px;
+   }
+ </style>
+<body>
+</html>

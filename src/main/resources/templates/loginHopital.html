@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link type="text/css" href="../static//css/styles.css" rel="stylesheet"  th:href="@{/css/styles.css}" />
+
+</head>
+<body>
+    <div class="contentLogin">
+       <form th:action="@{/login}" method="post">
+           <img src="../static/img/login.png" th:src="@{/img/login.png}" class="login"/>
+           <h1>Login Here</h1>
+           <p>Username</p>
+           <input type="text" name="username" placeholder="Entre votre Username" />
+           <p>Password</p>
+           <input type="password" name="password" placeholder="Entre  votre Password"/>
+           <input type="submit" value="connexion"/>
+       </form>
+    </div>
+</body>
+</html>

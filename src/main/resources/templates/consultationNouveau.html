@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="../static/css/consultation.css" rel="stylesheet" th:href="@{/css/consultation.css}" />
+    <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" src="../js/jquery.js" th:href="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../js/jquery-dataTable.min.js" th:href="@{/js/jquery-dataTable.min.js}"></script>
+    <script type="text/javascript" src="../js/script.js" th:href="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.responsive.css" th:href="@{/css/dataTables.responsive.css}"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" th:href="@{/css/jquery.dataTables.css}"/>
+</head>
+<body>
+		<div class="navbar">
+			    <ul>
+			        <li><a href="menu"> Acceuille </a></li>
+			        <li><a th:href="@{/patientsecretaire}"> Patient </a></li>
+			        <li><a href="#"> Rendez Vous </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/rv}"> Ajouter un rendezVous  </a></li>
+			                <li><a th:href="@{/listRv}"> List rendezVous </a></li>
+			            </ul>
+			        </li>
+			       
+			        <li><a href="#"> Consultation </a>
+			            <ul class="ul2">
+			                <li><a th:href="@{/listpatient}"> List Patient </a></li>
+			                <li><a th:href="@{/listconsultation}"> List consultation</a></li>
+			            </ul>
+			        </li>
+			        <li><a href="#">Parametrage</a>
+			             <ul class="ul2">
+			                <li><a href="medecin"> Medecin </a></li>
+			                <li><a href="secretaire">Secretaire</a></li>
+			                <li><a href="service"> Service </a></li>
+			                <li><a href="specialite">Specialite</a></li>
+			                <li><a href="parametrageduree">DureeConsultation</a></li>
+			            </ul>
+			        </li>
+			    
+			         <li><a th:href="@{/statistique}">statistique</a></li>
+			        <li class="pull-right"><a th:href="@{/deconnexion}"> Deconnection </a></li>
+			    </ul>
+        </div>
+   <div class="container formu-consultation">
+       <h1>Consultation </h1>
+       <hr>
+       <div class="row">
+           <div class="col-md-6">
+               <p> <span class="paddinng">Nom Complet</h6></span>&ensp;:&ensp;<span th:text="${patientcons.nomComplet}"></span> </p>
+               <p><span class="paddinng">Adresse </h6></span>&ensp;&ensp;&ensp;&ensp;&ensp;:&ensp;<span th:text="${patientcons.adresse}"> </span></p>
+               <p> <span class="paddinng">Telephone</h6></span>&ensp;&ensp;&ensp;&ensp;:&ensp;<span th:text="${patientcons.Telephone}"></span> </p>
+               <p> <span class="paddinng">Nationnalite</h6></span>&ensp;&ensp;&ensp;:&ensp;<span th:text="${patientcons.nationalite}"> </span></p>
+               <p> <span class="paddinng">DateNaissanc</h6></span>&ensp;:&ensp;<span th:text="${patientcons.DateNaissance}"> </span></p>
+               <p> <span class="paddinng">NumPiece</h6></span>&ensp;&ensp;&ensp;&ensp;:&ensp;<span th:text="${patientcons.numPiece}"> </span>
+           </div>
+           <div class="col-md-6" >
+              <form  th:method="post" th:action="@{/saveConsultation}" th:object="${consultation}">
+                  <div class="form-group">
+                      <label>Observation</label>
+                      <textarea class="form-control"  rows="7" name="remarque" > </textarea>
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label">Ordonnance</label>
+                      <input type="checkbox"  class="checkbox-inline" id="chk" onclick="display()" />
+                  </div>
+                  <div class="form-group"  id="hiddenField">
+                      <textarea class="form-control" rows="7" name="ordonnance" > </textarea>
+                  </div>
+                  <div class="form-group">
+                      <input type="submit" value="Enregistre" class="btn btn-primary btn-block" />
+                  </div>
+              </form>
+           </div>
+           <button class="btn btn-primary btn-block" id="btnafficher" onclick="myFunctionAfficher()"> Afficher les historique de cet patient</button>
+           <button class="btn btn-primary btn-block" id="btncacher" onclick="myFunctionCacher()"> cacher les historique de cet patient</button>
+       </div>
+       <div id="hiddenText">
+           <table class="table table-hover table-responsive table-bordered " id="tableProduits">
+               <!-- NB id="tableProduits" permet de relier la table avec datable -->
+               <thead>
+               <tr>
+                   <!-- les differentes colonnes -->
+                   <th>date Consultation</th>
+                   <th>Observation</th>
+                   <th>Ordonnance</th>
+               </tr>
+               </thead>
+               <tbody>
+               <!-- Parcours des donnees dans la base de donnee-->
+               <tr th:each="cons:${consultPatient}">
+                   <td th:text="${#dates.format(cons.dateConsultation, 'dd-MM-yyyy')}"></td>
+                   <td><textarea rows="2" cols="60" th:text="${cons.remarque}"></textarea></td>
+                   <td><textarea rows="2" cols="60" th:text="${cons.ordonnance}"> </textarea></td>
+
+                   <!-- les differentes actions -->
+               </tr>
+               </tbody>
+           </table>
+       </div>
+   </div>
+<style>
+    body{
+        background-image: url("hopi.jpg");
+        background-size: cover;
+    }
+    p{
+        padding: 10px;
+    }
+    hr{
+        background: white;
+    }
+    .formu-consultation{
+        background: rgba(0,0,0,0.9);
+        color:white;
+        margin-top:20px;
+        padding:20px;
+        box-shadow: 0px 0px 10px  grey;
+    }
+</style>
+ <script type="text/javascript">
+    document.getElementById("hiddenField").style.display = "none";
+
+    function display()
+    {
+        var chk = document.getElementById("chk");
+        if(chk.checked ==1)
+        {
+            document.getElementById("hiddenField").style.display = "block";
+
+        }
+        else{
+            document.getElementById("hiddenField").style.display = "none";
+        }
+    }
+
+    document.getElementById("hiddenText").style.display = "none";
+    document.getElementById("btncacher").style.display = "none";
+
+    function myFunctionAfficher() {
+
+        document.getElementById("hiddenText").style.display = "block";
+        document.getElementById("btnafficher").style.display = "none";
+        document.getElementById("btncacher").style.display = "block";
+    }
+
+    function myFunctionCacher() {
+
+        document.getElementById("hiddenText").style.display = "none";
+        document.getElementById("btnafficher").style.display = "block";
+        document.getElementById("btncacher").style.display = "none";
+    }
+
+
+</script>
+<style>
+ td{
+  color:black;
+ }
+</style>
+</body>
+</html>

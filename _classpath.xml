@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-20040616.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-6.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.12.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core_3.2.0.v_671.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core.manipulation_1.0.0.v20060605-1400.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

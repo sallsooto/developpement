@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+th{
+        color:black;
+    }
+    .contentDiv{
+        background: white;
+        background-size: cover;
+    }
+    p{
+        color:black;
+        padding: 10px;
+    }
+   .form{
+      
+       font-size: 16px;
+       border-radius:20px;
+       color:black;
+      
+       outline: none;
+       text-align:center;       
+   }
+  
+.sansBordure{
+	border:none;
+}
